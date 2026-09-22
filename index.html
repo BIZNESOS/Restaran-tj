@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Cormorant+Garamond:wght@600;700&amp;family=Marck+Script&amp;display=swap" rel="stylesheet">
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script async="" src="https://telegram.org/js/telegram-widget.js?22"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
@@ -343,6 +344,13 @@ h1,h2,h3,p{margin:0;}
 .status-line{display:flex; align-items:center; gap:12px; font-weight:600; font-size:15.5px;}
 .status-line .orb{width:20px; height:20px; border-radius:50%; background:radial-gradient(circle at 40% 35%,#ffe08a,currentColor 70%); box-shadow:0 0 14px currentColor; flex:none;}
 .st-y{color:#f6b93b;} .st-b{color:#5aa8f6;} .st-o{color:#ff9b57;} .st-t{color:#3fe0d0;} .st-g{color:#3fe6a0;}
+.tg-connect{display:flex; flex-wrap:wrap; align-items:center; gap:12px; padding:16px; border-radius:18px; border:1px solid rgba(28,127,220,.38); background:linear-gradient(180deg,rgba(20,44,72,.55),rgba(10,22,36,.6)); margin:-8px 0 22px;}
+.tgc-ic{width:44px; height:44px; border-radius:50%; background:linear-gradient(180deg,#2189e6,#1774cf); display:grid; place-items:center; color:#fff; flex:none;}
+.tgc-ic .i{width:22px; height:22px;}
+.tgc-txt{flex:1; min-width:180px; font-size:12.5px; line-height:1.5; color:#c4d0dc;}
+.tgc-txt b{display:block; font-size:14.5px; color:#fff; margin-bottom:3px;}
+.tg-connect .btn{height:48px;}
+.tg-ok{display:flex; align-items:center; justify-content:center; gap:10px; padding:12px 14px; border-radius:16px; margin:-8px 0 22px; background:rgba(34,211,138,.08); border:1px solid rgba(34,211,138,.25); color:#4fe6a4; font-size:13.5px; font-weight:600;}
 #screen-confirm .btn-outline{width:auto; min-width:250px; margin:0 auto; display:flex;}
 #screen-confirm .link-btn{align-self:center; margin-top:6px;}
 .tracker{display:grid; grid-template-columns:repeat(5,1fr); margin-top:22px; padding:22px 4px 16px; border:1px solid var(--line); border-radius:24px; background:rgba(10,20,29,.6);}
@@ -687,7 +695,7 @@ h1,h2,h3,p{margin:0;}
 <!-- ============================================================
      SPLASH
 ============================================================ -->
-<div id="splash">
+<div id="splash" style="transition: opacity 0.4s; opacity: 0; display: none;">
   <span class="logo">
     <svg class="crown"><use href="#i-crown"></use></svg>
     <span class="logo-txt"><span class="logo-name js-rest-name">Royal Rest</span><span class="logo-sub">RESTAURANT</span></span>
@@ -822,10 +830,39 @@ h1,h2,h3,p{margin:0;}
   <div class="page">
     <button class="back-link" onclick="goto('screen-welcome')"><svg class="i"><use href="#i-back"></use></svg>Назад</button>
     <h1 class="page-title">Выберите стол</h1>
-    <div class="tables-grid" id="tablesGrid">
-      <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
-      <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
-    </div>
+    <div class="tables-grid" id="tablesGrid"><div class="table-card wait ">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 1</div>
+    <span class="pill p-yellow"><span class="dt"></span>Ожидает</span>
+  </div><div class="table-card wait ">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 2</div>
+    <span class="pill p-yellow"><span class="dt"></span>Ожидает</span>
+  </div><div class="table-card free " onclick="selectTable('t3')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 3</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="selectTable('t4')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 4</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="selectTable('t5')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 5</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="selectTable('t6')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 6</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="selectTable('t7')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 7</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="selectTable('t8')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 8</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div></div>
     <div class="selected-bar" id="selectedBar" hidden="">
       <span class="ok-dot"><svg class="i"><use href="#i-check"></use></svg></span>
       <span class="t">Стол №<span id="selBarNum">-</span> выбран</span>
@@ -849,10 +886,10 @@ h1,h2,h3,p{margin:0;}
     <button class="round-btn" onclick="openDrawer()" aria-label="Меню"><svg class="i"><use href="#i-menu"></use></svg></button>
   </div>
   <div class="page">
-    <div class="cat-scroll" id="catScroll"></div>
+    <div class="cat-scroll" id="catScroll"><button class="cat-chip active" onclick="setCatFilter('all')"><svg class="i "><use href="#i-grid"></use></svg><span>Все</span></button><button class="cat-chip " onclick="setCatFilter('c1')"><svg class="i "><use href="#i-plate"></use></svg><span>Вторые блюда</span></button><button class="cat-chip " onclick="setCatFilter('c2')"><svg class="i "><use href="#i-bowl"></use></svg><span>Первые блюда</span></button><button class="cat-chip " onclick="setCatFilter('c5')"><svg class="i "><use href="#i-cake"></use></svg><span>Десерты</span></button><button class="cat-chip " onclick="setCatFilter('c4')"><svg class="i "><use href="#i-cup"></use></svg><span>Напитки</span></button><button class="cat-chip " onclick="setCatFilter('c3')"><svg class="i "><use href="#i-salad"></use></svg><span>Салаты</span></button><button class="cat-chip " onclick="setCatFilter('c6')"><svg class="i "><use href="#i-pizza"></use></svg><span>Пицца</span></button><button class="cat-chip " onclick="setCatFilter('c7')"><svg class="i "><use href="#i-burger"></use></svg><span>Бургеры</span></button></div>
     <h2 class="section-h" id="catTitle">Все блюда</h2>
     <div class="dish-grid" id="dishGrid"></div>
-    <div id="catalogEmpty" class="empty-state" style="display:none;">
+    <div id="catalogEmpty" class="empty-state" style="display: block;">
       <svg class="i"><use href="#i-fork"></use></svg><div>Ничего не найдено</div>
     </div>
   </div>
@@ -871,13 +908,14 @@ h1,h2,h3,p{margin:0;}
       <span class="logo" onclick="logoTap()"><svg class="crown"><use href="#i-crown"></use></svg><span class="logo-txt"><span class="logo-name js-rest-name">Royal Rest</span><span class="logo-sub">RESTAURANT</span></span></span>
       <button class="x" onclick="closeCart()" aria-label="Закрыть"><svg class="i"><use href="#i-close"></use></svg></button>
     </div>
-    <h1>Ваш заказ</h1>
+    <h1 id="cartTitle">Ваш заказ</h1>
     <div class="table-row"><span class="round-ico"><svg class="i"><use href="#i-chair"></use></svg></span><span>Стол №<span id="cartTableNum">-</span></span></div>
     <div class="cart-list" id="cartItems"></div>
-    <div id="cartEmptyMsg" class="empty-state" style="display:none;"><svg class="i"><use href="#i-cart"></use></svg><div>Корзина пуста</div></div>
+    <div id="cartEmptyMsg" class="empty-state" style="display: block;"><svg class="i"><use href="#i-cart"></use></svg><div>Корзина пуста</div></div>
     <div class="cart-fill"></div>
-    <div class="cart-total"><span>Итого</span><span id="cartTotal">0 сомони</span></div>
-    <button class="btn btn-primary" id="checkoutBtn" onclick="placeOrder()">Оформить заказ<svg class="i"><use href="#i-arrow"></use></svg></button>
+    <div class="cart-total"><span id="cartTotalLabel">Итого</span><span id="cartTotal">0 сомони</span></div>
+    <div id="cartOrderTotalRow" class="muted" style="display:flex; justify-content:space-between; margin:-12px 0 18px; font-size:13px;" hidden=""><span>Итого по заказу №<span id="cartOrderNum"></span></span><span id="cartOrderTotal"></span></div>
+    <button class="btn btn-primary" id="checkoutBtn" onclick="placeOrder()" disabled="">Оформить заказ<svg class="i"><use href="#i-arrow"></use></svg></button>
     <nav class="tabbar">
       <button class="tab" onclick="navMenu()"><svg class="i"><use href="#i-grid"></use></svg>Меню</button>
       <button class="tab active"><svg class="i"><use href="#i-cart"></use></svg>Корзина<span class="badge-red" id="tabCartBadge" hidden="">0</span></button>
@@ -903,6 +941,13 @@ h1,h2,h3,p{margin:0;}
       <div class="info-card"><span>Сумма</span><b id="confirmTotal">0</b></div>
     </div>
     <div class="status-card"><span class="lbl">Статус</span><div class="status-line st-y" id="confirmStatus"><span class="orb"></span><span>Ожидает принятия</span></div></div>
+    <div class="tg-connect" id="tgConnect" hidden="">
+      <div class="tgc-ic"><svg class="i f"><use href="#i-tg"></use></svg></div>
+      <div class="tgc-txt"><b>Статус заказа и чек — в Telegram</b>Бот напишет «Спасибо за заказ», даст кнопки «Ещё заказать» и «Вызвать официанта», а после закрытия заказа пришлёт чек в PDF.</div>
+      <button class="btn btn-tg" onclick="connectTelegram()"><svg class="i f"><use href="#i-tg"></use></svg>Подключить Telegram</button>
+      <button class="link-btn" style="width:100%; padding:2px;" onclick="openBotDeepLink()">Открыть бота вручную</button>
+    </div>
+    <div class="tg-ok" id="tgConnected" hidden=""><svg class="i"><use href="#i-check"></use></svg>Telegram подключён — чек придёт в бот</div>
     <button class="btn btn-outline" onclick="backToMenu()">Вернуться в меню</button>
     <button class="link-btn" onclick="openReceipt()">Электронный чек</button>
     <div class="tracker" id="tracker">
@@ -1058,25 +1103,25 @@ h1,h2,h3,p{margin:0;}
         <div class="admin-page" id="admPage-dashboard">
           <div class="stat-grid">
             <div class="stat-card"><div class="sl">Заказы сегодня</div><div class="sv" id="dStatOrders">0</div><span class="trend" id="dTrendOrders" style="display:none;"></span></div>
-            <div class="stat-card"><div class="sl">Выручка</div><div class="sv" id="dStatRevenue">0</div><span class="trend" id="dTrendRevenue" style="display:none;"></span></div>
+            <div class="stat-card"><div class="sl">Выручка</div><div class="sv" id="dStatRevenue">0<span class="cur"> сомони</span></div><span class="trend" id="dTrendRevenue" style="display:none;"></span></div>
             <div class="stat-card"><div class="sl">Активные заказы</div><div class="sv" id="dStatActive">0</div></div>
-            <div class="stat-card"><div class="sl">Свободные столы</div><div class="sv" id="dStatFree">0</div></div>
-            <div class="stat-card deco-red"><div class="sl">Занятые столы</div><div class="sv" id="dStatBusy">0</div></div>
+            <div class="stat-card"><div class="sl">Свободные столы</div><div class="sv" id="dStatFree">6</div></div>
+            <div class="stat-card deco-red"><div class="sl">Занятые столы</div><div class="sv" id="dStatBusy">2</div></div>
             <div class="stat-card deco-green"><div class="sl">Официанты онлайн</div><div class="sv" id="dStatWaiters">0</div></div>
           </div>
           <div class="dash-row">
             <div class="panel-card">
               <h3 class="gold">Выручка за неделю</h3>
-              <div class="week-chart" id="weekChart"></div>
-              <div class="week-labels" id="weekLabels"></div>
+              <div class="week-chart" id="weekChart"><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div><div class="bar-col"><div class="bar" style="height:0%" title="0 сомони"></div></div></div>
+              <div class="week-labels" id="weekLabels"><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span><span>Пн</span><span>Вт</span></div>
             </div>
             <div class="panel-card">
               <h3>Популярные блюда</h3>
-              <div class="top-list" id="topDishesDash"></div>
+              <div class="top-list" id="topDishesDash"><div class="muted" style="font-size:13px;padding:10px 0;">Пока нет данных</div></div>
             </div>
           </div>
           <div class="section-title">Последние заказы</div>
-          <div id="dashRecentOrders"></div>
+          <div id="dashRecentOrders"><div class="empty-state"><svg class="i "><use href="#i-orders"></use></svg><div>Заказов пока нет</div></div></div>
         </div>
 
         <!-- Orders -->
@@ -1094,7 +1139,7 @@ h1,h2,h3,p{margin:0;}
               </select>
             </div>
           </div>
-          <div id="adminOrdersList"></div>
+          <div id="adminOrdersList"><div class="empty-state"><svg class="i "><use href="#i-orders"></use></svg><div>Ничего не найдено</div></div></div>
         </div>
 
         <!-- Menu -->
@@ -1103,25 +1148,57 @@ h1,h2,h3,p{margin:0;}
             <button class="btn btn-ghost btn-sm" onclick="openCategoryModal()"><svg class="i"><use href="#i-folder"></use></svg>Категории</button>
             <button class="btn btn-primary btn-sm" onclick="openDishModal()"><svg class="i"><use href="#i-plus"></use></svg>Добавить блюдо</button>
           </div>
-          <div class="cat-scroll" id="adminCatScroll"></div>
-          <div id="adminMenuList"></div>
+          <div class="cat-scroll" id="adminCatScroll"><button class="cat-chip active" onclick="setCatFilter('all'); renderAdminMenu()"><svg class="i "><use href="#i-grid"></use></svg><span>Все</span></button><button class="cat-chip " onclick="setCatFilter('c1'); renderAdminMenu()"><svg class="i "><use href="#i-plate"></use></svg><span>Вторые блюда</span></button><button class="cat-chip " onclick="setCatFilter('c2'); renderAdminMenu()"><svg class="i "><use href="#i-bowl"></use></svg><span>Первые блюда</span></button><button class="cat-chip " onclick="setCatFilter('c5'); renderAdminMenu()"><svg class="i "><use href="#i-cake"></use></svg><span>Десерты</span></button><button class="cat-chip " onclick="setCatFilter('c4'); renderAdminMenu()"><svg class="i "><use href="#i-cup"></use></svg><span>Напитки</span></button><button class="cat-chip " onclick="setCatFilter('c3'); renderAdminMenu()"><svg class="i "><use href="#i-salad"></use></svg><span>Салаты</span></button><button class="cat-chip " onclick="setCatFilter('c6'); renderAdminMenu()"><svg class="i "><use href="#i-pizza"></use></svg><span>Пицца</span></button><button class="cat-chip " onclick="setCatFilter('c7'); renderAdminMenu()"><svg class="i "><use href="#i-burger"></use></svg><span>Бургеры</span></button></div>
+          <div id="adminMenuList"><div class="empty-state"><svg class="i "><use href="#i-fork"></use></svg><div>Блюд пока нет</div></div></div>
         </div>
 
         <!-- Tables -->
         <div class="admin-page" id="admPage-tables" style="display:none;">
           <button class="btn btn-primary btn-sm" style="margin-bottom:16px;" onclick="addTable()"><svg class="i"><use href="#i-plus"></use></svg>Добавить стол</button>
-          <div class="tables-grid" id="adminTablesGrid"></div>
+          <div class="tables-grid" id="adminTablesGrid"><div class="table-card wait " onclick="adminTableAction('t1')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 1</div>
+    <span class="pill p-yellow"><span class="dt"></span>Ожидает</span>
+  </div><div class="table-card wait " onclick="adminTableAction('t2')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 2</div>
+    <span class="pill p-yellow"><span class="dt"></span>Ожидает</span>
+  </div><div class="table-card free " onclick="adminTableAction('t3')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 3</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="adminTableAction('t4')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 4</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="adminTableAction('t5')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 5</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="adminTableAction('t6')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 6</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="adminTableAction('t7')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 7</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div><div class="table-card free " onclick="adminTableAction('t8')">
+    <svg class="ti" viewBox="0 0 72 60" fill="none"><use href="#i-table"></use></svg>
+    <div class="nm">Стол 8</div>
+    <span class="pill p-green"><span class="gem"></span>Свободен</span>
+  </div></div>
         </div>
 
         <!-- Waiters -->
         <div class="admin-page" id="admPage-waiters" style="display:none;">
           <div class="section-title" style="margin-top:0;">Заявки на рассмотрении</div>
-          <div id="waiterApplications"></div>
+          <div id="waiterApplications"><div class="muted" style="font-size:13px; margin-bottom:10px;">Новых заявок нет</div></div>
           <div class="section-title">Официанты</div>
           <div class="tl-wrap">
             <table class="table-list">
               <thead><tr><th></th><th>ФИО</th><th>Телефон</th><th>Статус</th><th>Telegram ID</th><th>Заказов</th><th>Заработок</th><th></th></tr></thead>
-              <tbody id="waitersTableBody"></tbody>
+              <tbody id="waitersTableBody"><tr><td colspan="8" style="text-align:center; padding:22px; color:var(--muted);">Официантов пока нет</td></tr></tbody>
             </table>
           </div>
         </div>
@@ -1134,7 +1211,7 @@ h1,h2,h3,p{margin:0;}
           <div class="tl-wrap">
             <table class="table-list">
               <thead><tr><th>Официант</th><th>Процент, %</th><th>Заказов</th><th>Начислено</th></tr></thead>
-              <tbody id="payrollBody"></tbody>
+              <tbody id="payrollBody"><tr><td colspan="4" style="text-align:center; padding:22px; color:var(--muted);">Официантов пока нет</td></tr></tbody>
             </table>
           </div>
           <div class="cart-total" style="max-width:420px; font-size:18px;"><span>Всего начислено</span><span id="payrollTotal">0 сомони</span></div>
@@ -1143,14 +1220,14 @@ h1,h2,h3,p{margin:0;}
         <!-- Analytics -->
         <div class="admin-page" id="admPage-analytics" style="display:none;">
           <div class="stat-grid">
-            <div class="stat-card"><div class="sl">Выручка за неделю</div><div class="sv" id="aStatRevWeek">0</div></div>
-            <div class="stat-card"><div class="sl">Выручка за месяц</div><div class="sv" id="aStatRevMonth">0</div></div>
-            <div class="stat-card"><div class="sl">Средний чек</div><div class="sv" id="aStatAvg">0</div></div>
+            <div class="stat-card"><div class="sl">Выручка за неделю</div><div class="sv" id="aStatRevWeek">0<span class="cur"> сомони</span></div></div>
+            <div class="stat-card"><div class="sl">Выручка за месяц</div><div class="sv" id="aStatRevMonth">0<span class="cur"> сомони</span></div></div>
+            <div class="stat-card"><div class="sl">Средний чек</div><div class="sv" id="aStatAvg">0<span class="cur"> сомони</span></div></div>
             <div class="stat-card"><div class="sl">Всего заказов</div><div class="sv" id="aStatCount">0</div></div>
           </div>
           <div class="panel-card" style="margin-top:14px;">
             <h3>Топ блюд</h3>
-            <div class="top-list" id="topDishes"></div>
+            <div class="top-list" id="topDishes"><div class="muted" style="font-size:13px;padding:10px 0;">Пока нет данных</div></div>
           </div>
         </div>
 
@@ -1162,7 +1239,31 @@ h1,h2,h3,p{margin:0;}
             <div class="form-group" style="margin:0;"><label>Акцентный цвет</label><input type="color" id="setAccentColor" value="#e8ae6e" onchange="saveRestSettings()"></div>
           </div>
           <div class="section-title">Уведомления в Telegram</div>
-          <div class="tg-phone" id="tgPreview"></div>
+          <div class="tg-phone" id="tgPreview">
+    <div class="tg-head">
+      <svg class="i back"><use href="#i-back"></use></svg>
+      <span class="tg-ava"><svg class="i f"><use href="#i-tg"></use></svg></span>
+      <div class="nm">Telegram Bot<span>bot</span></div>
+      <svg class="i"><use href="#i-dots"></use></svg>
+    </div>
+    <div class="tg-body">
+      <div class="tg-msg">
+        <h4><svg class="crown"><use href="#i-crown"></use></svg>Новый заказ!</h4>
+        <div><svg class="i "><use href="#i-orders"></use></svg> Заказ: #1048</div>
+        <div><svg class="i "><use href="#i-chair"></use></svg> Стол: №7</div>
+        <div style="margin-top:6px;">Заказ:</div>
+        <ul><li>Тирамису × 1 — 30 сомони</li><li>Чизкейк × 1 — 35 сомони</li><li>Мороженое × 1 — 20 сомони</li></ul>
+        <div class="tot"><b>Итого:</b> 85 сомони</div>
+        <span class="tg-time">06:17</span>
+      </div>
+      <div class="tg-status"><svg class="i "><use href="#i-clock"></use></svg>Ожидает официанта</div>
+      <div class="tg-for"><svg class="i "><use href="#i-orders"></use></svg>Для официантов:</div>
+      <div class="tg-card">
+        Новый заказ #1048<br>Стол №7<br>Сумма: 85 сомони
+        <button class="tg-btn" type="button">Принять заказ</button>
+      </div>
+    </div>
+    <div class="tg-input"><span class="send"><svg class="i f"><use href="#i-tg"></use></svg></span><span class="ph">Написать сообщение...</span><svg class="i "><use href="#i-clip"></use></svg><svg class="i "><use href="#i-mic"></use></svg></div></div>
           <div class="section-title">Конфигурация системы</div>
           <div class="config-note" style="max-width:520px;">Firebase и Telegram настраиваются в начале файла (секция <b>CONFIG</b> в коде), не в этой панели — впишите туда ваши ключи.</div>
         </div>
@@ -1277,6 +1378,7 @@ const FIREBASE_CONFIG = {
 const TELEGRAM_CONFIG = {
   BOT_TOKEN: "8918621897:AAHrSJqG7uFWu8QDF-DsW264EMwVXppZ7_A",   // @Restaran_adminbot
   ADMIN_CHAT_ID: "8086096270",
+  BOT_USERNAME: "Restaran_adminbot",
   ENABLED: true
 };
 
@@ -1364,31 +1466,171 @@ async function tgSend(chatId, text, extra){
 function siteUrl(){ if(SITE_URL) return SITE_URL; return /^https?:/.test(location.href) ? location.origin + location.pathname : ''; }
 function botButton(text, act, orderId, wid){
   const base = siteUrl(); if(!base) return null;
-  const url = `${base}?bot=${act}&o=${encodeURIComponent(orderId)}&w=${encodeURIComponent(wid)}`;
+  let url = `${base}?bot=${act}&o=${encodeURIComponent(orderId)}`;
+  if(wid) url += `&w=${encodeURIComponent(wid)}`;
   return base.startsWith('https://') ? { text, web_app:{ url } } : { text, url };
 }
+/* Две кнопки под сообщениями гостю: «Ещё заказать» и «Вызвать официанта» */
+function customerKeyboard(orderId){
+  const row = [botButton('Ещё заказать','more',orderId), botButton('Вызвать официанта','call',orderId)].filter(Boolean);
+  return row.length ? { reply_markup:{ inline_keyboard:[row] } } : undefined;
+}
+const itemLines = items => items.map(i=>`• ${esc(i.name)} × ${i.qty}`).join('\n');
+const activeWaiterEntries = waiters => Object.entries(waiters||{}).filter(([id,w])=>w.status==='active');
+
 function notifyAdminNewOrder(order){
   const lines = order.items.map(i => `• ${esc(i.name)} × ${i.qty} — ${i.price*i.qty} ${CURRENCY}`).join("\n");
   const text = `👑 <b>Новый заказ!</b>\n\n🧾 Заказ: <b>#${order.num}</b>\n🪑 Стол: №${order.table}\n\nЗаказ:\n${lines}\n\n<b>Итого:</b> ${order.total} ${CURRENCY}\n🕐 ${fmtTime(order.createdAt)}\n\n🟡 Ожидает официанта`;
-  tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, text);
+  return tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, text);
 }
 function notifyWaitersNewOrder(order, orderId, waiterEntries){
   const text = `📋 <b>Для официантов:</b>\n\nНовый заказ #${order.num}\nСтол №${order.table}\nСумма: ${order.total} ${CURRENCY}`;
-  (waiterEntries||[]).filter(([id,w])=>w.chatId).forEach(([wid,w])=>{
+  return Promise.all((waiterEntries||[]).filter(([id,w])=>w.chatId).map(([wid,w])=>{
     const btn = botButton('Принять заказ', 'accept', orderId, wid);
-    tgSend(w.chatId, btn ? text : text + '\n\nОткройте кабинет официанта на сайте, чтобы принять заказ.', btn ? { reply_markup:{ inline_keyboard:[[btn]] } } : undefined);
-  });
+    return tgSend(w.chatId, btn ? text : text + '\n\nОткройте кабинет официанта на сайте, чтобы принять заказ.', btn ? { reply_markup:{ inline_keyboard:[[btn]] } } : undefined);
+  }));
 }
 function notifyWaiterAccepted(order, orderId, wid, w){
-  const lines = order.items.map(i=>`• ${esc(i.name)} × ${i.qty}`).join('\n');
   const btn = botButton('Закрыть заказ', 'close', orderId, wid);
-  if(w.chatId) tgSend(w.chatId, `✅ <b>Вы приняли заказ #${order.num}</b>\n\nСтол №${order.table}\n${lines}\n\nСумма: <b>${order.total} ${CURRENCY}</b>\n\nКогда гость уйдёт — нажмите «Закрыть заказ».`, btn ? { reply_markup:{ inline_keyboard:[[btn]] } } : undefined);
-  tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `✅ Заказ #${order.num} принят\n👤 Официант: ${esc(w.name)}\n🪑 Стол №${order.table}`);
+  return Promise.all([
+    w.chatId ? tgSend(w.chatId, `✅ <b>Вы приняли заказ #${order.num}</b>\n\nСтол №${order.table}\n${itemLines(order.items)}\n\nСумма: <b>${order.total} ${CURRENCY}</b>\n\nКогда гость уйдёт — нажмите «Закрыть заказ».`, btn ? { reply_markup:{ inline_keyboard:[[btn]] } } : undefined) : null,
+    tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `✅ Заказ #${order.num} принят\n👤 Официант: ${esc(w.name)}\n🪑 Стол №${order.table}`)
+  ]);
 }
 function notifyWaiterClosed(order, w, pct, earned, totalEarned){
-  if(w.chatId) tgSend(w.chatId, `🔒 <b>Заказ #${order.num} закрыт</b>\n\nСтол №${order.table} свободен.\nВаш процент: ${pct}% = <b>${nf(earned)} ${CURRENCY}</b>\nВсего начислено: ${nf(totalEarned)} ${CURRENCY}`);
-  tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `🔒 Заказ #${order.num} закрыт\n🪑 Стол №${order.table} свободен\n👤 ${esc(w.name)}: +${nf(earned)} ${CURRENCY}`);
+  return Promise.all([
+    w.chatId ? tgSend(w.chatId, `🔒 <b>Заказ #${order.num} закрыт</b>\n\nСтол №${order.table} свободен.\nВаш процент: ${pct}% = <b>${nf(earned)} ${CURRENCY}</b>\nВсего начислено: ${nf(totalEarned)} ${CURRENCY}`) : null,
+    tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `🔒 Заказ #${order.num} закрыт\n🪑 Стол №${order.table} свободен\n👤 ${esc(w.name)}: +${nf(earned)} ${CURRENCY}`)
+  ]);
 }
+
+/* ---- Сообщения гостю ---- */
+function notifyCustomerPlaced(order, orderId, addon){
+  if(!order.customerChatId) return Promise.resolve(false);
+  const head = addon ? `➕ <b>Добавка к заказу #${order.num} принята!</b>` : `👑 <b>Спасибо за заказ!</b>`;
+  const text = `${head}\n\n🧾 Заказ #${order.num} · Стол №${order.table}\n${itemLines(addon ? addon.items : order.items)}\n\nСумма заказа: <b>${order.total} ${CURRENCY}</b>\n\n🍳 Ваш заказ готовится. Приятного аппетита!`;
+  return tgSend(order.customerChatId, text, customerKeyboard(orderId));
+}
+function notifyWaitersAddon(order, addon, targets){
+  const text = `➕ <b>Добавка к заказу #${order.num}</b>\n🪑 Стол №${order.table}\n\n${itemLines(addon.items)}\n\nСумма добавки: ${addon.total} ${CURRENCY}\nИтого по заказу: <b>${order.total} ${CURRENCY}</b>`;
+  return Promise.all([
+    ...targets.filter(([id,w])=>w.chatId).map(([id,w])=>tgSend(w.chatId, text)),
+    tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, text)
+  ]);
+}
+
+/* ---- PDF-чек (рисуется на canvas и упаковывается в PDF без сторонних библиотек) ---- */
+function wrapText(ctx, text, maxW){
+  const words = String(text).split(/\s+/), lines = []; let cur = '';
+  words.forEach(w=>{
+    while(ctx.measureText(w).width > maxW && w.length > 1){           // очень длинное слово — режем
+      let k = w.length; while(k>1 && ctx.measureText(w.slice(0,k)).width > maxW) k--;
+      if(cur){ lines.push(cur); cur=''; }
+      lines.push(w.slice(0,k)); w = w.slice(k);
+    }
+    const t = cur ? cur+' '+w : w;
+    if(cur && ctx.measureText(t).width > maxW){ lines.push(cur); cur = w; } else cur = t;
+  });
+  if(cur) lines.push(cur);
+  return lines.length ? lines : [''];
+}
+async function buildReceiptPdf(order){
+  const S = 2, W = 420, padX = 38;
+  const SERIF = '"Cormorant Garamond", Georgia, "Times New Roman", serif';
+  const SANS = 'Inter, "Segoe UI", Roboto, Arial, sans-serif';
+  try{
+    await Promise.race([Promise.all([document.fonts.load(`600 36px ${SERIF}`), document.fonts.load(`700 16px ${SANS}`), document.fonts.load(`400 14px ${SANS}`)]), new Promise(r=>setTimeout(r,1500))]);
+  }catch(e){}
+  const m = document.createElement('canvas').getContext('2d');
+  m.font = `500 14px ${SANS}`;
+  const xQty = W-padX-118, xSum = W-padX, nameMax = xQty - 46 - padX;
+  const rows = order.items.map(i=>({lines:wrapText(m, i.name, nameMax), qty:i.qty, sum:i.price*i.qty}));
+  const rowsH = rows.reduce((h,r)=>h + r.lines.length*19 + 14, 0);
+  const H = 372 + rowsH + (order.waiterName ? 30 : 0);
+  const cv = document.createElement('canvas'); cv.width = W*S; cv.height = H*S;
+  const c = cv.getContext('2d'); c.scale(S,S);
+  c.fillStyle = '#f3f2ee'; c.fillRect(0,0,W,H);
+  c.strokeStyle = '#cdbb9b'; c.lineWidth = 1; c.strokeRect(10.5,10.5,W-21,H-21);
+  c.strokeStyle = '#e3d7c1'; c.strokeRect(14.5,14.5,W-29,H-29);
+  const corner = (x,y,sx,sy)=>{ c.save(); c.translate(x,y); c.scale(sx,sy); c.strokeStyle='#b39a72'; c.lineWidth=1.2; c.beginPath();
+    c.moveTo(4,26); c.lineTo(4,10); c.quadraticCurveTo(4,4,10,4); c.lineTo(26,4); c.moveTo(10,21); c.lineTo(10,14); c.quadraticCurveTo(10,10,14,10); c.lineTo(21,10); c.stroke(); c.restore(); };
+  corner(10,10,1,1); corner(W-10,10,-1,1); corner(10,H-10,1,-1); corner(W-10,H-10,-1,-1);
+  // корона
+  c.save(); c.translate(W/2-29, 38); c.scale(1.04,1.04); c.fillStyle='#111';
+  c.fill(new Path2D('M6 29 9.5 11.5 19.5 20.5 28 6.5l8.5 14 10-9L50 29z'));
+  [[9.5,8.6,2.6],[28,3.8,2.8],[46.5,8.6,2.6]].forEach(([x,y,r])=>{ c.beginPath(); c.arc(x,y,r,0,Math.PI*2); c.fill(); });
+  c.fillRect(6,31.6,44,3.2);
+  c.strokeStyle='rgba(243,242,238,.55)'; c.lineWidth=1.5; c.stroke(new Path2D('M16.5 27 28 14.5 39.5 27'));
+  c.restore();
+  c.textAlign = 'center'; c.fillStyle = '#111';
+  c.font = `600 40px ${SERIF}`; c.fillText(STATE.restaurant.name || DEFAULT_RESTAURANT_NAME, W/2, 118);
+  const sub = 'RESTAURANT'; c.font = `500 9px ${SANS}`; c.fillStyle = '#444'; c.textAlign = 'left';
+  const sp = 4.2; const subW = [...sub].reduce((w,ch)=>w+c.measureText(ch).width+sp,0)-sp; let sx = W/2 - subW/2;
+  [...sub].forEach(ch=>{ c.fillText(ch, sx, 138); sx += c.measureText(ch).width + sp; });
+  c.textAlign = 'center'; c.fillStyle = '#111'; c.font = `700 20px ${SANS}`; c.fillText('Электронный чек', W/2, 186);
+  const d = new Date(order.createdAt);
+  const date = d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'}) + '  ' + fmtTime(order.createdAt);
+  c.textAlign = 'left'; c.fillStyle = '#141b26'; c.font = `700 15.5px ${SANS}`; c.fillText('Заказ №'+order.num, padX, 226); c.fillText('Стол №'+order.table, padX, 250);
+  c.textAlign = 'right'; c.font = `400 13px ${SANS}`; c.fillStyle = '#3a4452'; c.fillText(date, W-padX, 226);
+  const line = y => { c.strokeStyle = '#d7cdbb'; c.lineWidth = 1; c.beginPath(); c.moveTo(padX,y+.5); c.lineTo(W-padX,y+.5); c.stroke(); };
+  line(268);
+  c.font = `500 13px ${SANS}`; c.fillStyle = '#333c49';
+  c.textAlign = 'left'; c.fillText('Блюдо', padX, 292); c.textAlign = 'right'; c.fillText('Кол-во', xQty, 292); c.fillText('Сумма', xSum, 292);
+  line(306);
+  let y = 334; c.fillStyle = '#1b2431';
+  rows.forEach(r=>{
+    c.font = `500 14px ${SANS}`; c.textAlign = 'left';
+    r.lines.forEach((ln,i)=>c.fillText(ln, padX, y + i*19));
+    c.textAlign = 'right'; c.fillText(String(r.qty), xQty, y); c.fillText(nf(r.sum)+' '+CURRENCY, xSum, y);
+    y += r.lines.length*19 + 14;
+  });
+  line(y-8);
+  y += 22;
+  c.fillStyle = '#111'; c.font = `800 22px ${SANS}`; c.textAlign = 'left'; c.fillText('Итого:', padX, y);
+  c.textAlign = 'right'; c.fillText(nf(order.total)+' '+CURRENCY, xSum, y);
+  y += 28;
+  if(order.waiterName){ c.textAlign='left'; c.font=`400 13px ${SANS}`; c.fillStyle='#2a3442'; c.fillText('Официант: '+order.waiterName, padX, y); y += 30; }
+  c.textAlign = 'center'; c.font = `400 14px ${SANS}`; c.fillStyle = '#2a3442'; c.fillText('Спасибо за посещение!', W/2, y + 22);
+  c.save(); c.translate(W/2-14, y+34); c.scale(1.17,1.17); c.fillStyle='#f4a340';
+  c.fill(new Path2D('M12 20.5s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.8a4.3 4.3 0 0 1 7.5 2.7c0 5.4-7.5 10-7.5 10z')); c.restore();
+  const jpeg = await new Promise(res=>cv.toBlob(res,'image/jpeg',0.92));
+  return jpegToPdf(new Uint8Array(await jpeg.arrayBuffer()), cv.width, cv.height, W, H);
+}
+function jpegToPdf(jpeg, wPx, hPx, wPt, hPt){
+  const enc = new TextEncoder(), parts = [], off = []; let pos = 0;
+  const push = u8 => { parts.push(u8); pos += u8.length; };
+  const str = t => push(enc.encode(t));
+  str('%PDF-1.4\n');
+  off[1] = pos; str('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+  off[2] = pos; str('2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n');
+  off[3] = pos; str(`3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${wPt} ${hPt}] /Resources << /XObject << /Im0 4 0 R >> >> /Contents 5 0 R >>\nendobj\n`);
+  off[4] = pos; str(`4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${wPx} /Height ${hPx} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${jpeg.length} >>\nstream\n`); push(jpeg); str('\nendstream\nendobj\n');
+  const content = `q ${wPt} 0 0 ${hPt} 0 0 cm /Im0 Do Q`;
+  off[5] = pos; str(`5 0 obj\n<< /Length ${content.length} >>\nstream\n${content}\nendstream\nendobj\n`);
+  const xref = pos; let x = 'xref\n0 6\n0000000000 65535 f \n';
+  for(let i=1;i<=5;i++) x += String(off[i]).padStart(10,'0') + ' 00000 n \n';
+  str(x + `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`);
+  return new Blob(parts, {type:'application/pdf'});
+}
+async function sendReceiptPdf(order){
+  if(!order.customerChatId || !TELEGRAM_CONFIG.ENABLED || TELEGRAM_CONFIG.BOT_TOKEN.includes('ВАШ_')) return false;
+  const caption = `🧾 Ваш чек — заказ #${order.num}\nИтого: ${order.total} ${CURRENCY}\nСпасибо за посещение! 🧡`;
+  try{
+    const pdf = await buildReceiptPdf(order);
+    const fd = new FormData();
+    fd.append('chat_id', order.customerChatId);
+    fd.append('caption', caption);
+    fd.append('document', pdf, `check_${order.num}.pdf`);
+    const r = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/sendDocument`, { method:'POST', body:fd });
+    const j = await r.json().catch(()=>({ok:false}));
+    if(j.ok) return true;
+    console.warn('sendDocument error:', j.description);
+  }catch(e){ console.warn('PDF receipt failed', e); }
+  // запасной вариант — текстовый чек
+  const lines = order.items.map(i=>`• ${esc(i.name)} × ${i.qty} — ${i.price*i.qty} ${CURRENCY}`).join('\n');
+  return tgSend(order.customerChatId, `🧾 <b>Чек — заказ #${order.num}</b>\nСтол №${order.table}\n\n${lines}\n\n<b>Итого: ${order.total} ${CURRENCY}</b>\nСпасибо за посещение!`);
+}
+
 function notifyAdminWaiterApplication(app){
   tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `👨‍🍳 <b>НОВАЯ ЗАЯВКА</b>\n\n👤 ФИО: ${esc(app.name)}\n📱 Телефон: ${esc(app.phone)}\n🎂 Возраст: ${esc(app.age)}`);
 }
@@ -1400,8 +1642,9 @@ const LEGACY_ACCENTS = ['#ff7a45', '#d4af6a'];
 let STATE = {
   restaurant: { name: DEFAULT_RESTAURANT_NAME, accent: "#e8ae6e", defaultPercent: 8 },
   tables: {}, categories: {}, dishes: {}, orders: {}, waiters: {}, waiterApplications: {},
-  currentTable: null, cart: {}, currentOrderId: null, currentWaiter: null, orderSeq: 1000
+  currentTable: null, cart: {}, currentOrderId: null, currentWaiter: null, orderSeq: 1000, customer: null
 };
+try{ STATE.customer = JSON.parse(localStorage.getItem('rr_customer')||'null'); }catch(e){}
 
 const LOCAL_KEY = 'rds_demo_v2';
 const LOCAL = fbReady ? null : loadLocal();
@@ -1773,12 +2016,19 @@ function renderFab(){
 function openCart(){
   if(!STATE.currentTable){ toast('Выберите стол'); goto('screen-tables'); return; }
   $('cartTableNum').textContent = STATE.tables[STATE.currentTable].num;
+  const cur = STATE.currentOrderId && STATE.orders[STATE.currentOrderId];
+  $('cartTitle').textContent = (cur && cur.status!=='done' && cur.tableId===STATE.currentTable) ? 'Добавка к заказу #'+cur.num : 'Ваш заказ';
   renderCart();
   goto('screen-cart');
 }
 function closeCart(){ goto('screen-catalog'); }
 function renderCart(){
   const wrap = $('cartItems'); if(!wrap) return;
+  const existing = STATE.currentOrderId && STATE.orders[STATE.currentOrderId];
+  const isAddon = existing && existing.status!=='done' && existing.tableId===STATE.currentTable;
+  $('cartTotalLabel').textContent = isAddon ? 'Сумма добавки' : 'Итого';
+  $('cartOrderTotalRow').hidden = !isAddon;
+  if(isAddon){ $('cartOrderNum').textContent = existing.num; }
   const entries = Object.entries(STATE.cart).filter(([id])=>STATE.dishes[id]);
   $('cartEmptyMsg').style.display = entries.length ? 'none' : 'block';
   $('checkoutBtn').disabled = entries.length===0;
@@ -1796,6 +2046,7 @@ function renderCart(){
     </div>`;
   }).join('');
   $('cartTotal').textContent = fmtMoney(total);
+  if(isAddon) $('cartOrderTotal').textContent = fmtMoney(existing.total + total);
   renderFab();
 }
 
@@ -1806,18 +2057,35 @@ async function placeOrder(){
   const entries = Object.entries(STATE.cart).filter(([id])=>STATE.dishes[id]);
   if(!entries.length || !STATE.currentTable) return;
   showLoading('Оформляем заказ...');
-
   const items = entries.map(([id,qty])=>({id, name:STATE.dishes[id].name, price:STATE.dishes[id].price, qty}));
+  await new Promise(r=>setTimeout(r, 400));
+
+  // Если у гостя уже есть незакрытый заказ за этим столом — это добавка к нему
+  let existingId = STATE.currentOrderId;
+  if(existingId){
+    const o = fbReady ? await readOnce('orders/'+existingId) : STATE.orders[existingId];
+    if(!(o && o.status!=='done' && o.tableId===STATE.currentTable)) existingId = null;
+  }
+  if(existingId){
+    const r = await addToOrderCore(existingId, items);
+    if(r.ok){
+      STATE.cart = {};
+      hideLoading(); renderDishes(); renderCart();
+      showConfirm();
+      toast('Добавка отправлена официанту', 'ok');
+      return;
+    }
+  }
+
   const total = items.reduce((s,i)=>s+i.price*i.qty,0);
   const table = STATE.tables[STATE.currentTable];
   const orderNum = STATE.orderSeq+1;
   const order = {
     num: orderNum, tableId: STATE.currentTable, table: table.num,
     items, total, status:'pending', waiterId:null, waiterName:null,
+    customerChatId: STATE.customer ? STATE.customer.id : '', customerName: STATE.customer ? STATE.customer.name : '',
     createdAt: Date.now(), history:[{status:'pending', at:Date.now()}]
   };
-
-  await new Promise(r=>setTimeout(r, 500));
 
   let orderId;
   if(fbReady){
@@ -1836,12 +2104,42 @@ async function placeOrder(){
   STATE.currentOrderId = orderId;
 
   notifyAdminNewOrder(order);
-  notifyWaitersNewOrder(order, orderId, Object.entries(STATE.waiters).filter(([id,w])=>w.status==='active'));
+  notifyWaitersNewOrder(order, orderId, activeWaiterEntries(STATE.waiters));
+  notifyCustomerPlaced(order, orderId);
 
   STATE.cart = {};
   hideLoading();
   renderDishes(); renderCart();
   showConfirm();
+}
+
+/* Добавка к существующему заказу: позиции добавляются в тот же заказ, официанту уходит «Добавка к заказу №… стол …» */
+async function addToOrderCore(orderId, items){
+  const addTotal = items.reduce((s,i)=>s+i.price*i.qty,0);
+  const merge = cur => {
+    cur.items = (cur.items||[]).slice();
+    items.forEach(n=>{ const ex = cur.items.find(i=>i.id===n.id); if(ex) ex.qty += n.qty; else cur.items.push({...n}); });
+    cur.total = cur.items.reduce((s,i)=>s+i.price*i.qty,0);
+    cur.addons = (cur.addons||[]).concat([{items, total:addTotal, at:Date.now()}]);
+    cur.addonAt = Date.now();
+    cur.history = (cur.history||[]).concat([{status:'addon', at:Date.now()}]);
+    return cur;
+  };
+  let order;
+  if(fbReady){
+    const tx = await dbRef('orders/'+orderId).transaction(cur=>{ if(!cur) return cur; if(cur.status==='done') return; return merge(cur); });
+    if(!tx.committed || !tx.snapshot.val()) return {ok:false};
+    order = tx.snapshot.val();
+  } else {
+    const o = STATE.orders[orderId]; if(!o || o.status==='done') return {ok:false};
+    order = merge(o); saveLocal(); renderAll();
+  }
+  const waiters = fbReady ? ((await readOnce('waiters')) || {}) : STATE.waiters;
+  const targets = (order.waiterId && waiters[order.waiterId]) ? [[order.waiterId, waiters[order.waiterId]]] : activeWaiterEntries(waiters);
+  const addon = {items, total:addTotal};
+  notifyWaitersAddon(order, addon, targets);
+  notifyCustomerPlaced(order, orderId, addon);
+  return {ok:true, order};
 }
 
 function showConfirm(){
@@ -1878,6 +2176,10 @@ function renderOrderTracking(){
   line.innerHTML = `<span class="orb"></span><span>${st.label}</span>`;
   [...$('tracker').children].forEach((el,i)=>{ el.classList.toggle('done', i<st.i); el.classList.toggle('cur', i===st.i); });
   $('receiptPaper').innerHTML = receiptInner(order);
+  const linked = !!order.customerChatId;
+  const tgOn = TELEGRAM_CONFIG.ENABLED && !TELEGRAM_CONFIG.BOT_TOKEN.includes('ВАШ_');
+  $('tgConnect').hidden = linked || !tgOn;
+  $('tgConnected').hidden = !linked;
 }
 function backToMenu(){ goto('screen-catalog'); }
 function openReceipt(){
@@ -1987,7 +2289,7 @@ function waiterOrderCard(id, o, isNew){
   else action = `<button class="btn btn-primary btn-sm" onclick="setOrderStatus('${id}','done')">Заказ завершён</button>`;
   const st = ORDER_FLOW[o.status];
   return `<div class="order-card ${isNew?'pulse-new':''}">
-    <div class="oc-head"><span class="oc-num">Заказ #${o.num}</span><span class="pill ${st.pill}"><span class="dt"></span>${isNew?'Новый':st.short}</span></div>
+    <div class="oc-head"><span class="oc-num">Заказ #${o.num}</span><span style="display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end;">${o.callAt && Date.now()-o.callAt<600000 ? '<span class="pill p-red"><span class="dt"></span>Вызывает</span>' : ''}${o.addons && o.addons.length ? '<span class="pill p-blue">+ Добавка</span>' : ''}<span class="pill ${st.pill}"><span class="dt"></span>${isNew?'Новый':st.short}</span></span></div>
     <div class="oc-meta">${icon('chair')}Стол №${o.table}</div>
     <div class="oc-items">${items}</div>
     <div class="oc-foot"><span class="oc-total">${fmtMoney(o.total)}</span></div>
@@ -2054,7 +2356,7 @@ async function acceptOrderCore(orderId, wid){
     if(STATE.tables[o.tableId]) STATE.tables[o.tableId].status='accepted';
     order = o; saveLocal(); renderAll();
   }
-  notifyWaiterAccepted(order, orderId, wid, w);
+  await notifyWaiterAccepted(order, orderId, wid, w);
   return {ok:true, order, w};
 }
 
@@ -2100,7 +2402,7 @@ async function closeOrderCore(orderId, wid){
     order.waiterEarn = earned; totalEarned = w.earned;
     saveLocal(); renderAll();
   }
-  notifyWaiterClosed(order, w, pct, earned, totalEarned);
+  await Promise.all([notifyWaiterClosed(order, w, pct, earned, totalEarned), sendReceiptPdf(order)]);   // гостю уходит PDF-чек
   return {ok:true, order, w, pct, earned, totalEarned};
 }
 
@@ -2138,6 +2440,89 @@ async function setOrderStatus(orderId, status){
   toast('Статус обновлён', 'ok');
 }
 
+/* ---- Гость вызывает официанта (кнопка в боте) ---- */
+async function customerCallWaiter(orderId){
+  const order = fbReady ? await readOnce('orders/'+orderId) : STATE.orders[orderId];
+  if(!order) return {ok:false, reason:'Заказ не найден'};
+  if(order.status==='done') return {ok:false, reason:'Заказ уже закрыт'};
+  const recent = order.callAt && Date.now()-order.callAt < 60000;          // не спамим официанта повторными вызовами
+  if(!recent){
+    order.callAt = Date.now();
+    if(fbReady) await dbRef('orders/'+orderId+'/callAt').set(order.callAt); else { saveLocal(); renderAll(); }
+    const waiters = fbReady ? ((await readOnce('waiters')) || {}) : STATE.waiters;
+    const targets = (order.waiterId && waiters[order.waiterId]) ? [[order.waiterId, waiters[order.waiterId]]] : activeWaiterEntries(waiters);
+    const txt = `🔔 <b>Ваш клиент вызывает вас!</b>\n\n🪑 Стол №${order.table}\n🧾 Заказ #${order.num}`;
+    await Promise.all([
+      ...targets.filter(([id,w])=>w.chatId).map(([id,w])=>tgSend(w.chatId, txt)),
+      tgSend(TELEGRAM_CONFIG.ADMIN_CHAT_ID, `🔔 Вызов официанта · Стол №${order.table} · Заказ #${order.num}`)
+    ]);
+  }
+  if(order.customerChatId) await tgSend(order.customerChatId, `🔔 <b>Официант будет здесь через 2 минуты.</b>\n\nЕщё что-нибудь хотите?`, customerKeyboard(orderId));
+  return {ok:true, order, repeat:!!recent};
+}
+
+/* ---- Привязка гостя к Telegram-боту ---- */
+async function linkCustomer(orderId, chatId, from){
+  const name = [from && from.first_name, from && from.last_name].filter(Boolean).join(' ') || (from && from.username) || '';
+  let order;
+  if(fbReady){
+    order = await readOnce('orders/'+orderId); if(!order) return false;
+    if(String(order.customerChatId||'') === String(chatId)) return true;
+    await dbRef('orders/'+orderId).update({customerChatId:String(chatId), customerName:name});
+  } else {
+    order = STATE.orders[orderId]; if(!order) return false;
+  }
+  order.customerChatId = String(chatId); order.customerName = name;
+  if(!fbReady){ saveLocal(); renderAll(); }
+  if(STATE.currentOrderId === orderId){
+    STATE.customer = {id:String(chatId), name};
+    try{ localStorage.setItem('rr_customer', JSON.stringify(STATE.customer)); }catch(e){}
+  }
+  stopStartPolling();
+  await notifyCustomerPlaced(order, orderId);
+  toast('Telegram подключён — сообщение отправлено в бот', 'ok');
+  if($('screen-confirm').classList.contains('active')) renderOrderTracking();
+  return true;
+}
+/* Способ 1: вход через Telegram (виджет). Нужно один раз выполнить /setdomain у @BotFather. */
+function connectTelegram(){
+  const orderId = STATE.currentOrderId; if(!orderId) return;
+  const botId = TELEGRAM_CONFIG.BOT_TOKEN.split(':')[0];
+  if(window.Telegram && window.Telegram.Login && window.Telegram.Login.auth){
+    window.Telegram.Login.auth({bot_id: botId, request_access: 'write', lang: 'ru'}, user=>{
+      if(!user || !user.id){ toast('Подключение отменено. Можно открыть бота вручную.'); return; }
+      linkCustomer(orderId, user.id, user);
+    });
+  } else openBotDeepLink();
+}
+/* Способ 2: ссылка на бота (/start o_<id>). Пока страница открыта, ловим /start через getUpdates. */
+function openBotDeepLink(){
+  const orderId = STATE.currentOrderId; if(!orderId) return;
+  window.open(`https://t.me/${TELEGRAM_CONFIG.BOT_USERNAME}?start=o_${orderId}`, '_blank');
+  startStartPolling();
+}
+let pollTimer = null, pollOffset = 0, pollActive = false;
+function stopStartPolling(){ pollActive = false; clearTimeout(pollTimer); pollTimer = null; }
+function startStartPolling(){
+  stopStartPolling(); pollActive = true;
+  const until = Date.now() + 5*60000;
+  const tick = async ()=>{
+    if(!pollActive || Date.now() > until) return;
+    try{
+      const qs = new URLSearchParams({timeout:'0', offset:String(pollOffset), allowed_updates:JSON.stringify(['message'])});
+      const r = await fetch(`https://api.telegram.org/bot${TELEGRAM_CONFIG.BOT_TOKEN}/getUpdates?${qs}`);
+      const j = await r.json();
+      if(j.ok) for(const u of j.result){
+        pollOffset = u.update_id + 1;
+        const t = u.message && u.message.text;
+        if(t && t.startsWith('/start o_')) await linkCustomer(t.slice(9).trim(), u.message.chat.id, u.message.from);
+      }
+    }catch(e){}
+    if(pollActive) pollTimer = setTimeout(tick, 2500);
+  };
+  pollTimer = setTimeout(tick, 1500);
+}
+
 /* ---- Экран для кнопок из Telegram ---- */
 let botCtx = null;
 function renderBot(state, title, text, actions){
@@ -2159,11 +2544,34 @@ async function handleBotAction(){
   try{ history.replaceState(null, '', location.pathname); }catch(e){}
   goto('screen-bot');
   renderBot('loading', 'Подождите...', '');
-  if(!fbReady || !orderId || !wid || !['accept','close'].includes(act)){
+  const needsWaiter = ['accept','close'].includes(act);
+  if(!fbReady || !orderId || (needsWaiter && !wid) || !['accept','close','call','more'].includes(act)){
     renderBot('err', 'Ссылка недействительна', 'Откройте кабинет официанта на сайте.', '<button class="btn btn-outline" onclick="goto(\'screen-welcome\')">На сайт</button>');
     return true;
   }
   botCtx = {orderId, wid};
+  if(act==='call'){
+    const r = await customerCallWaiter(orderId);
+    if(!r.ok){ renderBot('err', 'Не получилось', esc(r.reason)); finishBotScreen(); return true; }
+    renderBot('ok', 'Официант скоро подойдёт', `Через 2 минуты официант будет здесь.<br><span class="muted">Стол №${r.order.table} · Заказ #${r.order.num}</span>`);
+    finishBotScreen(); return true;
+  }
+  if(act==='more'){
+    const o = await readOnce('orders/'+orderId);
+    if(!o){ renderBot('err', 'Заказ не найден', ''); return true; }
+    if(o.status==='done'){
+      renderBot('err', 'Заказ уже закрыт', 'Чтобы сделать новый заказ, выберите стол на сайте.', `<button class="btn btn-primary" onclick="goto('screen-tables')">Выбрать стол</button>`);
+      return true;
+    }
+    STATE.currentTable = o.tableId; STATE.currentOrderId = orderId;
+    if(!STATE.tables[o.tableId]) STATE.tables[o.tableId] = {num:o.table, status:'accepted'};
+    activeCatFilter = 'all';
+    $('cartTableNum').textContent = o.table;
+    goto('screen-catalog');
+    renderDishes(); renderCategoryChips();
+    toast(`Добавка к заказу #${o.num} · Стол №${o.table}`, 'ok');
+    return true;
+  }
   if(act==='accept'){
     const r = await acceptOrderCore(orderId, wid);
     if(!r.ok){ renderBot('err', 'Не получилось', esc(r.reason)); finishBotScreen(); return true; }
